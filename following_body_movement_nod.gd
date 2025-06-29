@@ -20,12 +20,15 @@ func get_IsEnebled() -> bool :
 # Speed of the ParentActor
 # Distance from Character to stop
 # Height over Character not to go below
-@export var speed : float = 2.0
-@export var distance : float = 2.0
-@export var minHeight : float = 0.5
+@export var speed : float = 3.0
+@export var distance : float = 3.0
+@export var minHeight : float = 1.0
 
 # internal variables
+# Body to follow or you select (by default) a Node or give the path to access it (only used if no node is selected)
 @export var _bodyToFollow : CollisionObject3D = null
+@export var _bodytoFollowPath : String = ""
+
 @onready var _parentActor : Node3D = get_parent()
 
 # the Movement code
@@ -51,5 +54,5 @@ func _physics_process(delta: float) -> void:
 				# Not to go below min_height
 				if (_parentActor.position.y < (bodyToFollowPosition.y + minHeight)):
 					_parentActor.position.y = bodyToFollowPosition.y + minHeight
-			else:
-				pass
+		else:
+			_bodyToFollow = get_node(_bodytoFollowPath)
