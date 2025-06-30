@@ -31,6 +31,12 @@ func get_IsEnebled() -> bool :
 
 @onready var _parentActor : Node3D = get_parent()
 
+
+func _notification(what):
+	if what == NOTIFICATION_WM_CLOSE_REQUEST:
+		_bodyToFollow.queue_free()
+		_parentActor.queue_free()
+		
 # the Movement code
 func _physics_process(delta: float) -> void:
 	# Only if it is enabled
