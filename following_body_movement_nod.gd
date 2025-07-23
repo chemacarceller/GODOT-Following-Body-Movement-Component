@@ -34,13 +34,13 @@ func get_IsEnebled() -> bool :
 
 func _notification(what):
 	if what == NOTIFICATION_WM_CLOSE_REQUEST:
-		_bodyToFollow.queue_free()
-		_parentActor.queue_free()
+		_bodyToFollow = null
+		_parentActor = null
 		
 # the Movement code
 func _physics_process(delta: float) -> void:
 	# Only if it is enabled
-	if _isEnabled :
+	if _isEnabled and _parentActor != null:
 		# If there is no CharacterToFollow the ParentActor simply doesn't move
 		if (_bodyToFollow != null):
 			var bodyToFollowPosition : Vector3 = _bodyToFollow.position
